@@ -1,5 +1,5 @@
 let firstCard;
-let SecondCard;
+let secondCard;
 let hasCardFlipped = false;
 
 
@@ -16,7 +16,7 @@ function flipCard() {
         firstCard = this;
         return;
     }
-    SecondCard = this;
+    secondCard = this;
     hasCardFlipped = false;
 
     doCardsMatch();
@@ -24,22 +24,29 @@ function flipCard() {
 
 //function to check if cards match with data-set added into html
 function doCardsMatch() {
-    if(firstCard.dataset.icon === SecondCard.dataset.icon) {
+    if(firstCard.dataset.icon === secondCard.dataset.icon) {
+        removeCards();
         disable();
         return;
     }
     unflippingCards();
 }
 
+//this removes the cards on a match
+function removeCards() {
+    firstCard.style.visibility = 'hidden'
+    secondCard.style.visibility = 'hidden'
+}
+
 function disable() {
     firstCard.removeEventListener('click', flipCard);
-    SecondCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
 }
 
 function unflippingCards() {
     setTimeout(() => {
         firstCard.classList.remove('flip');
-        SecondCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
     }, 2000);
 }
 
