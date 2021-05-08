@@ -4,12 +4,16 @@
     box-sizing: border-box;
   }
 
+
 body {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+.fas{
+    font-size: 70px;
+  }
 .title {
     display: flex;
     justify-content: center;
@@ -35,6 +39,7 @@ body {
     transform: rotateY(180deg);
   }
   .card-container {
+    text-align: center;
     width: calc(25% - 10px);
     height: calc(33.333% - 10px);
     margin: 5px;
