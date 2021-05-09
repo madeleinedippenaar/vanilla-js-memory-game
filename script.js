@@ -2,6 +2,10 @@ let firstCard;
 let secondCard;
 let hasCardFlipped = false;
 
+const todayDate = new Date();
+console.log(todayDate);
+document.querySelector('.new-date').innerHTML = todayDate.toLocaleString();;
+
 
 const cards = document.querySelectorAll('.card-container');
 
@@ -47,7 +51,7 @@ function unflippingCards() {
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
-    }, 2000);
+    }, 1000);
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
