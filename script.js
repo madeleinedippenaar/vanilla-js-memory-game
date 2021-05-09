@@ -1,7 +1,12 @@
 let firstCard;
 let secondCard;
 let hasCardFlipped = false;
+let cardsLocked = false;
+let min = 0;
+let sec = 0;
+let stopTime = true;
 
+const timer = document.querySelector('.stop-watch');
 const todayDate = new Date();
 console.log(todayDate);
 document.querySelector('.new-date').innerHTML = todayDate.toLocaleString();;
@@ -12,9 +17,9 @@ const cards = document.querySelectorAll('.card-container');
 
 //function added to allow a toggle switch for a card clicked
 function flipCard() {
-    // this.classList.toggle('flip');
+    if (cardsLocked) return;
     this.classList.add('flip');
-
+    if (this === firstCard) return;
     if(!hasCardFlipped) {
         hasCardFlipped = true;
         firstCard = this;
@@ -48,10 +53,43 @@ function disable() {
 }
 
 function unflippingCards() {
+    cardsLocked = true;
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
+        cardsLocked = false;
     }, 1000);
+}
+function timerFlow() {
+    if (stopTime === false) {
+        sec = parseInt(sec);
+        min = parseInt(min);
+        sec++;
+        if (sec === 60) {
+            min = min +1;
+            sec = 0;
+        }
+        if (sec < 10 || sec === 0) {
+            sec = '0' + sec;
+        }
+        if (min < 10 || min === 0) {
+            min = '0' + sec;
+        }
+        timer.innerHTML = `${min}:${sec}`;
+        setTimeout('timerFlow()', 1000);
+    }
+}
+
+function startTimer() {
+    if (stopTime === true) {
+        stopTime = false;
+        timerFlow();
+    }
+}
+function stopTimer() {
+    if(stopTime === false) {
+        stopTime = true;
+    }
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
